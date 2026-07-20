@@ -1,4 +1,4 @@
-# Atiku Delivers
+# Scan The Plan
 
 QR-driven policy hub for Atiku Abubakar's plan — a public product page, a
 secure admin panel, and a secure client insights dashboard reading QR scan

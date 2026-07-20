@@ -1,6 +1,6 @@
 {
-  "name": "Atiku Delivers Insights",
-  "short_name": "AD Insights",
+  "name": "Scan The Plan Insights",
+  "short_name": "STP Insights",
   "start_url": "/client-insights/",
   "display": "standalone",
   "background_color": "#14161a",
