@@ -3,380 +3,293 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
-<meta name="theme-color" content="#C41E3A" />
-<title>Scan The Plan — Atiku Abubakar</title>
-<meta name="description" content="Atiku Abubakar's policy plan, sector by sector and zone by zone." />
+<meta name="theme-color" content="#0A2A66" />
+<title>Scan The Plan — Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: '#0A2A66',
+          navydark: '#071c47',
+          green: '#008751',
+          gold: '#C9A227',
+          bgcream: '#F7F8FA'
+        },
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        borderRadius: { card: '22px' },
+        boxShadow: { card: '0 10px 35px rgba(0,0,0,.08)' }
+      }
+    }
+  }
+</script>
 <style>
-  :root {
-    --red: #C41E3A;
-    --red-dark: #8f1529;
-    --ink: #14161a;
-    --muted: #6b6f78;
-    --border: #ece7e0;
-    --cream: #faf8f5;
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; margin: 0; padding: 0; overscroll-behavior: none; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--ink);
-    background:
-      radial-gradient(circle at 15% 0%, rgba(196,30,58,.10), transparent 55%),
-      radial-gradient(circle at 100% 15%, rgba(196,30,58,.06), transparent 50%),
-      var(--cream);
-    max-width: 480px;
-    margin: 0 auto;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-  }
-  h1, h2, .brand { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.5px; }
-
-  /* ---- Hero ---- */
-  .hero {
-    flex: 0 0 auto;
-    position: relative;
-    padding-top: var(--safe-top);
-    height: 148px;
-    overflow: hidden;
-  }
-  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display:block; }
-  .hero::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(20,22,26,.10) 0%, rgba(20,22,26,.25) 55%, rgba(20,22,26,.92) 100%);
-  }
-  .hero-text { position: absolute; left: 16px; right: 16px; bottom: 10px; z-index: 2; color: #fff; }
-  .hero-brand { font-size: 12px; letter-spacing: 2px; opacity: .85; }
-  .hero-text h1 { font-size: 26px; margin: 0; line-height: 1; }
-
-  /* ---- Content area (never scrolls on the grid screens) ---- */
-  main { flex: 1 1 auto; min-height: 0; padding: 12px 14px 6px; display: flex; flex-direction: column; }
-  .panel { display: none; flex: 1; min-height: 0; flex-direction: column; }
-  .panel.active { display: flex; }
-
-  .section-label {
-    flex: 0 0 auto;
-    font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--red); margin: 0 0 8px; padding-left: 2px;
-  }
-
-  /* ---- Tile grid ---- */
-  .tile-grid {
-    flex: 1 1 auto; min-height: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  #sectors .tile-grid { grid-template-rows: repeat(5, 1fr); }
-  #zones .tile-grid { grid-template-rows: repeat(3, 1fr); }
-
-  .tile {
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 12px;
-    cursor: pointer;
-    transition: transform .1s ease;
-    box-shadow: 0 1px 2px rgba(20,22,26,.04);
-  }
-  .tile:active { transform: scale(.96); }
-  .tile .badge {
-    flex: 0 0 auto;
-    width: 34px; height: 34px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 17px;
-  }
-  .tile .label { font-size: 12.5px; font-weight: 700; line-height: 1.2; }
-
-  /* ---- Detail overlay (its own screen — allowed to scroll) ---- */
-  .overlay {
-    position: absolute; inset: 0; z-index: 30;
-    background: var(--cream);
-    display: flex; flex-direction: column;
-    transform: translateY(100%);
-    transition: transform .25s ease;
-  }
+  html, body { height: 100%; margin: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F7F8FA; overscroll-behavior: none; }
+  .app-shell { max-width: 430px; margin: 0 auto; height: 100dvh; display: flex; flex-direction: column; position: relative; background: #F7F8FA; overflow: hidden; }
+  .screen { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .screen::-webkit-scrollbar { display: none; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .overlay { position: absolute; inset: 0; z-index: 40; background: #F7F8FA; display: flex; flex-direction: column; transform: translateY(100%); transition: transform .28s cubic-bezier(.4,0,.2,1); }
   .overlay.open { transform: translateY(0); }
-  .overlay-header {
-    flex: 0 0 auto;
-    display: flex; align-items: center; gap: 10px;
-    padding: calc(var(--safe-top) + 14px) 16px 14px;
-    border-bottom: 1px solid var(--border);
-    background: #fff;
-  }
-  .overlay-header .back {
-    width: 32px; height: 32px; border-radius: 50%; background: var(--cream);
-    display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; flex: 0 0 auto;
-  }
-  .overlay-header .badge { width: 32px; height: 32px; border-radius: 9px; display:flex; align-items:center; justify-content:center; font-size:16px; flex:0 0 auto; }
-  .overlay-header h2 { font-size: 20px; margin: 0; line-height: 1.1; }
-  .overlay-body { flex: 1 1 auto; overflow-y: auto; padding: 16px; }
-  .overlay-body p.summary { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0 0 14px; }
-  .overlay-body ul { margin: 0; padding-left: 18px; color: var(--ink); font-size: 14px; line-height: 1.7; }
-  .overlay-body li { margin-bottom: 8px; }
-
-  /* ---- Share ---- */
-  #share .panel-inner { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
-  .share-intro { flex: 0 0 auto; text-align:center; margin-bottom:8px; }
-  .share-intro h2 { font-size: 20px; margin: 0; }
-  .share-intro p { color: var(--muted); font-size: 12px; margin:2px 0 0; }
-  select { flex: 0 0 auto; width:100%; padding:9px 12px; border-radius:10px; border:1px solid var(--border); font-family: inherit; font-size:13px; margin-bottom:8px; background:#fff; }
-  #card {
-    flex: 1 1 auto; min-height: 0; width: 100%; border-radius: 18px; overflow:hidden; position: relative;
-    background: linear-gradient(160deg, var(--red), var(--red-dark)); color:#fff;
-    margin-bottom:8px; display:flex; flex-direction:column;
-  }
-  #card .card-photo { flex: 1; min-height: 0; position: relative; overflow: hidden; }
-  #card .card-photo img { width:100%; height:100%; object-fit:cover; display:block; }
-  #card .card-photo::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(196,30,58,0) 40%, var(--red-dark) 100%); }
-  #card .card-text { flex: 0 0 auto; padding: 14px 18px 18px; }
-  #card .card-brand { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:2px; opacity:.85; }
-  #card h3 { font-size: 19px; margin:6px 0 4px; line-height:1.05; }
-  #card p { font-size: 12px; opacity:.92; line-height:1.4; margin:0; }
-  #card .tag { display:inline-block; margin-top:10px; font-size:10px; background:rgba(255,255,255,.18); padding:5px 10px; border-radius:999px; font-weight:600; }
-  .btn { flex: 0 0 auto; display:block; width:100%; padding:12px; border-radius:12px; font-weight:700; text-decoration:none; font-size:13.5px; border:none; background: var(--ink); color:#fff; cursor:pointer; }
-
-  /* ---- Bottom nav ---- */
-  .bottom-nav {
-    flex: 0 0 auto;
-    background: #fff; border-top: 1px solid var(--border);
-    display:flex; padding: 6px 8px calc(6px + var(--safe-bottom));
-  }
-  .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; padding: 5px 4px; border-radius:12px; cursor:pointer; color: var(--muted); }
-  .nav-item.active { color: var(--red); }
-  .nav-item .icon { font-size: 18px; line-height:1; }
-  .nav-item .label { font-size: 10px; font-weight: 700; letter-spacing: .3px; }
+  .card-lift { transition: transform .15s ease, box-shadow .15s ease; }
+  .card-lift:active { transform: scale(.97); }
+  .safe-top { padding-top: env(safe-area-inset-top, 0px); }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <img src="/assets/images/atiku-running-mate.jpg" alt="Atiku Abubakar" />
-  <div class="hero-text">
-    <div class="hero-brand">SCAN THE PLAN</div>
-    <h1>THE PLAN.</h1>
-  </div>
-</div>
+<div class="app-shell">
 
-<main>
-  <div id="sectors" class="panel active">
-    <div class="section-label">10 Sectors — tap one</div>
-    <div class="tile-grid" id="sector-grid"></div>
-  </div>
-
-  <div id="zones" class="panel">
-    <div class="section-label">6 Geopolitical Zones — tap one</div>
-    <div class="tile-grid" id="zone-grid"></div>
-  </div>
-
-  <div id="share" class="panel">
-    <div class="panel-inner">
-      <div class="share-intro">
-        <h2>Share This Plan</h2>
-        <p>Pick a sector and download a card.</p>
+  <!-- HOME -->
+  <div id="tab-home" class="tab active screen">
+    <!-- Hero -->
+    <div class="relative h-56 safe-top overflow-hidden">
+      <img src="/assets/images/atiku-portrait.webp" alt="Atiku Abubakar" class="w-full h-full object-cover object-top" />
+      <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,42,102,.15) 0%, rgba(10,42,102,.55) 55%, rgba(7,28,71,.97) 100%);"></div>
+      <div class="absolute left-5 right-5 bottom-6 text-white">
+        <p class="text-xs tracking-widest font-semibold text-gold mb-2">SCAN THE PLAN</p>
+        <h1 class="text-2xl font-extrabold leading-tight mb-1">The Covenant<br/>with Nigerians</h1>
+        <p class="text-sm text-white/80">Building Nigeria together</p>
       </div>
-      <select id="card-sector-select"></select>
-      <div id="card">
-        <div class="card-photo"><img src="/assets/images/atiku-portrait.webp" alt="" /></div>
-        <div class="card-text">
-          <div class="card-brand">SCAN THE PLAN</div>
-          <h3 id="card-title">Economy &amp; Jobs</h3>
-          <p id="card-desc">Diversification, MSMEs, and a national job creation agenda.</p>
-          <div class="tag">Get Nigeria Working Again</div>
-        </div>
+    </div>
+
+    <!-- Search -->
+    <div class="px-5 -mt-6 relative z-10">
+      <div class="flex items-center gap-2 bg-white/90 backdrop-blur border border-white/60 rounded-full shadow-card px-4 py-3">
+        <i data-lucide="search" class="w-4 h-4 text-navy/60"></i>
+        <input id="search-input" type="text" placeholder="Search the plan..." class="flex-1 bg-transparent text-sm outline-none placeholder:text-navy/40" />
+        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-navy/60"></i>
       </div>
-      <button class="btn" id="download-card">Download Card</button>
+    </div>
+
+    <!-- Highlights -->
+    <div class="grid grid-cols-3 gap-3 px-5 mt-5">
+      <div class="bg-white rounded-card shadow-card px-3 py-4 text-center">
+        <p class="text-2xl font-extrabold text-navy" id="stat-sectors">10</p>
+        <p class="text-[10.5px] text-navy/50 font-medium mt-0.5">Sectors</p>
+      </div>
+      <div class="bg-white rounded-card shadow-card px-3 py-4 text-center">
+        <p class="text-2xl font-extrabold text-green" id="stat-zones">6</p>
+        <p class="text-[10.5px] text-navy/50 font-medium mt-0.5">Zones</p>
+      </div>
+      <div class="bg-white rounded-card shadow-card px-3 py-4 text-center">
+        <p class="text-2xl font-extrabold text-gold" id="stat-commitments">34</p>
+        <p class="text-[10.5px] text-navy/50 font-medium mt-0.5">Commitments</p>
+      </div>
+    </div>
+
+    <!-- Sector list -->
+    <div class="px-5 mt-6 pb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-bold text-navy">Priority sectors</h2>
+      </div>
+      <div id="sector-list" class="grid grid-cols-2 gap-3"></div>
     </div>
   </div>
-</main>
 
-<nav class="bottom-nav">
-  <div class="nav-item active" data-panel="sectors">
-    <div class="icon">&#9783;</div>
-    <div class="label">Sectors</div>
+  <!-- ZONES -->
+  <div id="tab-zones" class="tab screen">
+    <div class="px-5 pt-6 safe-top">
+      <h2 class="text-xl font-extrabold text-navy mb-1">Geopolitical zones</h2>
+      <p class="text-sm text-navy/50 mb-5">Regional priorities across Nigeria</p>
+      <div id="zone-list" class="flex flex-col gap-3 pb-6"></div>
+    </div>
   </div>
-  <div class="nav-item" data-panel="zones">
-    <div class="icon">&#128205;</div>
-    <div class="label">Zones</div>
-  </div>
-  <div class="nav-item" data-panel="share">
-    <div class="icon">&#8599;</div>
-    <div class="label">Share</div>
-  </div>
-</nav>
 
-<div class="overlay" id="detail-overlay">
-  <div class="overlay-header">
-    <div class="back" id="overlay-back">&#8592;</div>
-    <div class="badge" id="overlay-badge"></div>
-    <h2 id="overlay-title"></h2>
+  <!-- SHARE -->
+  <div id="tab-share" class="tab screen">
+    <div class="px-5 pt-6 safe-top flex flex-col h-full">
+      <h2 class="text-xl font-extrabold text-navy mb-1">Share this plan</h2>
+      <p class="text-sm text-navy/50 mb-4">Pick a sector and download a card</p>
+      <select id="card-sector-select" class="w-full bg-white border border-navy/10 rounded-2xl px-4 py-3 text-sm mb-4 shadow-card"></select>
+      <div id="share-card" class="rounded-card overflow-hidden shadow-card mb-4" style="aspect-ratio:1/1; background: linear-gradient(155deg, #0A2A66, #071c47); display:flex; flex-direction:column;">
+        <div class="flex-1 relative overflow-hidden">
+          <img src="/assets/images/atiku-portrait.webp" class="w-full h-full object-cover" />
+          <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,42,102,0) 40%, #071c47 100%);"></div>
+        </div>
+        <div class="p-5 text-white">
+          <p class="text-[11px] tracking-widest font-semibold text-gold">SCAN THE PLAN</p>
+          <h3 id="card-title" class="text-xl font-extrabold mt-1">Economy & Jobs</h3>
+          <p id="card-desc" class="text-xs text-white/80 mt-1 leading-relaxed"></p>
+        </div>
+      </div>
+      <button id="download-card" class="w-full bg-navy text-white rounded-2xl py-3.5 font-semibold text-sm mb-6">Download card</button>
+    </div>
   </div>
-  <div class="overlay-body">
-    <p class="summary" id="overlay-summary"></p>
-    <ul id="overlay-list"></ul>
+
+  <!-- Bottom nav -->
+  <nav class="flex-none bg-white border-t border-navy/5 flex px-2 py-2 safe-bottom relative z-20">
+    <button class="nav-btn flex-1 flex flex-col items-center gap-1 py-1.5 rounded-2xl text-navy" data-tab="home">
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold">Home</span>
+    </button>
+    <button class="nav-btn flex-1 flex flex-col items-center gap-1 py-1.5 rounded-2xl text-navy/40" data-tab="zones">
+      <i data-lucide="map" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold">Zones</span>
+    </button>
+    <button class="nav-btn flex-1 flex flex-col items-center gap-1 py-1.5 rounded-2xl text-navy/40" data-tab="share">
+      <i data-lucide="share-2" class="w-5 h-5"></i>
+      <span class="text-[10px] font-semibold">Share</span>
+    </button>
+  </nav>
+
+  <!-- Detail overlay -->
+  <div class="overlay" id="detail-overlay">
+    <div class="flex-none flex items-center gap-3 px-5 py-4 pt-6 safe-top bg-white border-b border-navy/5">
+      <button id="overlay-back" class="w-9 h-9 rounded-full bg-bgcream flex items-center justify-center">
+        <i data-lucide="arrow-left" class="w-4 h-4 text-navy"></i>
+      </button>
+      <div id="overlay-icon-wrap" class="w-9 h-9 rounded-2xl flex items-center justify-center flex-none"></div>
+      <h2 id="overlay-title" class="text-lg font-extrabold text-navy"></h2>
+    </div>
+    <div class="flex-1 overflow-y-auto px-5 py-5">
+      <p id="overlay-summary" class="text-sm text-navy/60 leading-relaxed mb-5"></p>
+      <p class="text-xs font-bold tracking-wide text-navy/40 uppercase mb-3">What we will do</p>
+      <div id="overlay-list" class="flex flex-col gap-2.5"></div>
+    </div>
   </div>
+
 </div>
 
 <script>
-const palette = ['#C41E3A','#1D4E89','#1B7A5A','#B8860B','#6A3D9A','#2E7D32','#8A5A2B','#0E7C9D','#5B6B00','#C2410C'];
+const ICONS = { briefcase:'briefcase', 'building-2':'building-2', 'graduation-cap':'graduation-cap', users:'users', 'shield-check':'shield-check', shield:'shield', landmark:'landmark', globe:'globe', trees:'trees', drama:'drama',
+  compass:'compass', flame:'flame', wheat:'wheat', store:'store', droplet:'droplet', cpu:'cpu' };
 
 const sectors = [
-  { icon: "💰", title: "Economy & Jobs", summary: "A plan to diversify Nigeria's economy beyond oil, strengthen agriculture and manufacturing, and back small businesses.",
-    points: [
-      "Grow non-oil sectors — agriculture, manufacturing, and MSMEs — as the main engines of new jobs.",
-      "Launch a national entrepreneurship and job creation programme targeting millions of new opportunities annually.",
-      "Expand apprenticeship and vocational training pathways for young people, including those without formal schooling.",
-      "Attract private investment through public-private partnerships and reformed capital markets."
-    ]},
-  { icon: "🏗️", title: "Infrastructure", summary: "Closing Nigeria's infrastructure gap across transport, power, technology, and housing.",
-    points: [
-      "Set up a dedicated infrastructure development unit to fast-track major projects.",
-      "Mobilize private and pension-fund capital through a new infrastructure debt fund.",
-      "Push forward power sector reform to expand reliable electricity access.",
-      "Support the digitization of government operations and the wider tech ecosystem."
-    ]},
-  { icon: "🎓", title: "Human Capital", summary: "Investing in education and health as the foundation for long-term national development.",
-    points: [
-      "Prioritize technical and vocational education aligned with the modern job market.",
-      "Expand access to quality, industry-relevant education nationwide.",
-      "Strengthen healthcare delivery systems and public health investment."
-    ]},
-  { icon: "🌱", title: "Youth & Women", summary: "Targeted programmes to expand opportunity for young people and women.",
-    points: [
-      "Scale up skills-acquisition and micro-enterprise support programmes.",
-      "Improve access to finance and training tailored to youth and women-led businesses.",
-      "Strengthen institutional support structures for empowerment initiatives."
-    ]},
-  { icon: "⚖️", title: "Anti-Corruption", summary: "A detect-sanction-strengthen approach to institutional integrity.",
-    points: [
-      "Deploy technology across government agencies to improve transparency.",
-      "Grant anti-corruption agencies financial independence and operational autonomy.",
-      "Fast-track outstanding corruption cases through dedicated tribunals.",
-      "Integrate national databases to improve financial crime detection."
-    ]},
-  { icon: "🛡️", title: "National Security", summary: "A restructured, better-coordinated approach to Nigeria's security architecture.",
-    points: [
-      "Improve coordination and information-sharing across security agencies.",
-      "Invest in modern security technology and equipment.",
-      "Pursue diplomacy, improved border control, and community-level conflict resolution.",
-      "Begin a gradual, structured move toward state policing."
-    ]},
-  { icon: "🏛️", title: "Governance", summary: "Structural reform aimed at giving Nigeria's regions greater autonomy and voice.",
-    points: [
-      "Pursue a restructuring agenda that strengthens federating units.",
-      "Reinforce the independence of the legislature and judiciary.",
-      "Promote cooperation and consensus across Nigeria's diverse regions."
-    ]},
-  { icon: "🌍", title: "Int'l Relations", summary: "Restoring Nigeria's leadership role in regional and global affairs.",
-    points: [
-      "Take a more active leadership role within ECOWAS and the African Union.",
-      "Strengthen diaspora engagement and channel remittances toward national development.",
-      "Pursue trade diversification and stronger multilateral partnerships."
-    ]},
-  { icon: "🌳", title: "Environment", summary: "Protecting Nigeria's most environmentally vulnerable regions.",
-    points: [
-      "Address Niger Delta pollution and environmental degradation.",
-      "Tackle desert encroachment and erosion in affected states.",
-      "Balance economic development with long-term environmental protection."
-    ]},
-  { icon: "🎭", title: "Culture & Sports", summary: "Backing Nigeria's creative economy as a driver of jobs and soft power.",
-    points: [
-      "Provide financial and regulatory support tailored to the entertainment industry.",
-      "Strengthen anti-piracy enforcement and intellectual property protections.",
-      "Promote tourism and cultural heritage as economic assets."
-    ]}
+  { icon:'briefcase', title:'Economy & Jobs', summary:"A plan to diversify Nigeria's economy beyond oil, strengthen agriculture and manufacturing, and back small businesses.",
+    points:["Grow non-oil sectors — agriculture, manufacturing, and MSMEs — as the main engines of new jobs.","Launch a national entrepreneurship and job creation programme targeting millions of new opportunities annually.","Expand apprenticeship and vocational training pathways for young people, including those without formal schooling.","Attract private investment through public-private partnerships and reformed capital markets."]},
+  { icon:'building-2', title:'Infrastructure', summary:"Closing Nigeria's infrastructure gap across transport, power, technology, and housing.",
+    points:["Set up a dedicated infrastructure development unit to fast-track major projects.","Mobilize private and pension-fund capital through a new infrastructure debt fund.","Push forward power sector reform to expand reliable electricity access.","Support the digitization of government operations and the wider tech ecosystem."]},
+  { icon:'graduation-cap', title:'Human Capital', summary:"Investing in education and health as the foundation for long-term national development.",
+    points:["Prioritize technical and vocational education aligned with the modern job market.","Expand access to quality, industry-relevant education nationwide.","Strengthen healthcare delivery systems and public health investment."]},
+  { icon:'users', title:'Youth & Women', summary:"Targeted programmes to expand opportunity for young people and women.",
+    points:["Scale up skills-acquisition and micro-enterprise support programmes.","Improve access to finance and training tailored to youth and women-led businesses.","Strengthen institutional support structures for empowerment initiatives."]},
+  { icon:'shield-check', title:'Anti-Corruption', summary:"A detect-sanction-strengthen approach to institutional integrity.",
+    points:["Deploy technology across government agencies to improve transparency.","Grant anti-corruption agencies financial independence and operational autonomy.","Fast-track outstanding corruption cases through dedicated tribunals.","Integrate national databases to improve financial crime detection."]},
+  { icon:'shield', title:'National Security', summary:"A restructured, better-coordinated approach to Nigeria's security architecture.",
+    points:["Improve coordination and information-sharing across security agencies.","Invest in modern security technology and equipment.","Pursue diplomacy, improved border control, and community-level conflict resolution.","Begin a gradual, structured move toward state policing."]},
+  { icon:'landmark', title:'Governance', summary:"Structural reform aimed at giving Nigeria's regions greater autonomy and voice.",
+    points:["Pursue a restructuring agenda that strengthens federating units.","Reinforce the independence of the legislature and judiciary.","Promote cooperation and consensus across Nigeria's diverse regions."]},
+  { icon:'globe', title:"Int'l Relations", summary:"Restoring Nigeria's leadership role in regional and global affairs.",
+    points:["Take a more active leadership role within ECOWAS and the African Union.","Strengthen diaspora engagement and channel remittances toward national development.","Pursue trade diversification and stronger multilateral partnerships."]},
+  { icon:'trees', title:'Environment', summary:"Protecting Nigeria's most environmentally vulnerable regions.",
+    points:["Address Niger Delta pollution and environmental degradation.","Tackle desert encroachment and erosion in affected states.","Balance economic development with long-term environmental protection."]},
+  { icon:'drama', title:'Culture & Sports', summary:"Backing Nigeria's creative economy as a driver of jobs and soft power.",
+    points:["Provide financial and regulatory support tailored to the entertainment industry.","Strengthen anti-piracy enforcement and intellectual property protections.","Promote tourism and cultural heritage as economic assets."]}
 ];
 
 const zones = [
-  { icon: "🧭", title: "North Central", summary: "Priorities for the middle belt.",
-    points: ["Resolve farmer–herder tensions through structured conflict-resolution mechanisms.", "Expand agricultural investment across the zone.", "Improve security coordination across the middle belt."] },
-  { icon: "🔥", title: "North East", summary: "Post-insurgency recovery priorities.",
-    points: ["Restructured and better-resourced security operations.", "Rebuild infrastructure in affected communities.", "Invest in human capital recovery programmes."] },
-  { icon: "🌾", title: "North West", summary: "Security and skills priorities.",
-    points: ["Tackle rural banditry and insecurity.", "Expand technical and vocational education.", "Strengthen agricultural value chains."] },
-  { icon: "🌴", title: "South East", summary: "Enterprise and inclusion priorities.",
-    points: ["Support MSMEs and entrepreneurship.", "Invest in regional infrastructure.", "Strengthen inclusion in national governance and economic planning."] },
-  { icon: "🛢️", title: "South South", summary: "Environmental and economic priorities.",
-    points: ["Niger Delta environmental remediation.", "Diversify the region's oil-dependent economy.", "Invest in regional infrastructure."] },
-  { icon: "💡", title: "South West", summary: "Technology and industry priorities.",
-    points: ["Grow technology and innovation hubs.", "Support industrial growth.", "Invest in manufacturing and services base."] }
+  { icon:'compass', title:'North Central', summary:'Priorities for the middle belt.', points:["Resolve farmer–herder tensions through structured conflict-resolution mechanisms.","Expand agricultural investment across the zone.","Improve security coordination across the middle belt."] },
+  { icon:'flame', title:'North East', summary:'Post-insurgency recovery priorities.', points:["Restructured and better-resourced security operations.","Rebuild infrastructure in affected communities.","Invest in human capital recovery programmes."] },
+  { icon:'wheat', title:'North West', summary:'Security and skills priorities.', points:["Tackle rural banditry and insecurity.","Expand technical and vocational education.","Strengthen agricultural value chains."] },
+  { icon:'store', title:'South East', summary:'Enterprise and inclusion priorities.', points:["Support MSMEs and entrepreneurship.","Invest in regional infrastructure.","Strengthen inclusion in national governance and economic planning."] },
+  { icon:'droplet', title:'South South', summary:'Environmental and economic priorities.', points:["Niger Delta environmental remediation.","Diversify the region's oil-dependent economy.","Invest in regional infrastructure."] },
+  { icon:'cpu', title:'South West', summary:'Technology and industry priorities.', points:["Grow technology and innovation hubs.","Support industrial growth.","Invest in manufacturing and services base."] }
 ];
 
-function renderGrid(containerId, items) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = items.map((it, i) => `
-    <div class="tile" data-i="${i}">
-      <div class="badge" style="background:${palette[i % palette.length]}22; color:${palette[i % palette.length]}">${it.icon}</div>
-      <div class="label">${it.title}</div>
-    </div>
-  `).join('');
+const totalCommitments = sectors.reduce((sum, s) => sum + s.points.length, 0);
+document.getElementById('stat-commitments').textContent = totalCommitments;
+document.getElementById('stat-sectors').textContent = sectors.length;
+document.getElementById('stat-zones').textContent = zones.length;
+
+function sectorTileHTML(item, i) {
+  return `
+    <div class="card-lift bg-white rounded-card shadow-card p-3.5 flex flex-col gap-2 cursor-pointer" data-list="sector" data-i="${i}">
+      <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-none" style="background:${i % 2 === 0 ? '#0A2A6614' : '#00875114'}">
+        <i data-lucide="${item.icon}" class="w-4.5 h-4.5" style="color:${i % 2 === 0 ? '#0A2A66' : '#008751'}"></i>
+      </div>
+      <div>
+        <p class="font-bold text-navy text-[13px] leading-tight">${item.title}</p>
+        <p class="text-[10.5px] text-navy/45 mt-0.5">${item.points.length} commitment${item.points.length===1?'':'s'}</p>
+      </div>
+    </div>`;
 }
-renderGrid('sector-grid', sectors);
-renderGrid('zone-grid', zones);
+
+function sectorCardHTML(item, i, listType) {
+  return `
+    <div class="card-lift bg-white rounded-card shadow-card p-4 flex items-center gap-3.5 cursor-pointer" data-list="${listType}" data-i="${i}">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-none" style="background:${i % 2 === 0 ? '#0A2A6614' : '#00875114'}">
+        <i data-lucide="${item.icon}" class="w-5 h-5" style="color:${i % 2 === 0 ? '#0A2A66' : '#008751'}"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="font-bold text-navy text-sm">${item.title}</p>
+        <p class="text-xs text-navy/45 mt-0.5">${item.points.length} commitment${item.points.length===1?'':'s'}</p>
+      </div>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-navy/30 flex-none"></i>
+    </div>`;
+}
+
+function renderSectorList(filter) {
+  const q = (filter || '').toLowerCase().trim();
+  const filtered = sectors.map((s,i) => ({s,i})).filter(({s}) => !q || s.title.toLowerCase().includes(q) || s.summary.toLowerCase().includes(q));
+  document.getElementById('sector-list').innerHTML = filtered.map(({s,i}) => sectorTileHTML(s, i)).join('') || '<p class="text-sm text-navy/40 text-center py-8 col-span-2">No matching sectors</p>';
+  lucide.createIcons();
+}
+renderSectorList('');
+
+document.getElementById('zone-list').innerHTML = zones.map((z,i) => sectorCardHTML(z, i, 'zone')).join('');
+
+document.getElementById('search-input').addEventListener('input', e => renderSectorList(e.target.value));
 
 const overlay = document.getElementById('detail-overlay');
-const overlayBadge = document.getElementById('overlay-badge');
-const overlayTitle = document.getElementById('overlay-title');
-const overlaySummary = document.getElementById('overlay-summary');
-const overlayList = document.getElementById('overlay-list');
-
 function openDetail(item, colorIndex) {
-  overlayBadge.style.background = palette[colorIndex % palette.length] + '22';
-  overlayBadge.style.color = palette[colorIndex % palette.length];
-  overlayBadge.textContent = item.icon;
-  overlayTitle.textContent = item.title;
-  overlaySummary.textContent = item.summary;
-  overlayList.innerHTML = item.points.map(p => `<li>${p}</li>`).join('');
+  const color = colorIndex % 2 === 0 ? '#0A2A66' : '#008751';
+  const bg = colorIndex % 2 === 0 ? '#0A2A6614' : '#00875114';
+  document.getElementById('overlay-icon-wrap').innerHTML = `<i data-lucide="${item.icon}" class="w-4 h-4"></i>`;
+  document.getElementById('overlay-icon-wrap').style.background = bg;
+  document.getElementById('overlay-icon-wrap').style.color = color;
+  document.getElementById('overlay-title').textContent = item.title;
+  document.getElementById('overlay-summary').textContent = item.summary;
+  document.getElementById('overlay-list').innerHTML = item.points.map(p => `
+    <div class="flex items-start gap-2.5 bg-white rounded-2xl shadow-card p-3.5">
+      <i data-lucide="check" class="w-4 h-4 text-green flex-none mt-0.5"></i>
+      <p class="text-sm text-navy/80 leading-relaxed">${p}</p>
+    </div>`).join('');
   overlay.classList.add('open');
+  lucide.createIcons();
 }
 document.getElementById('overlay-back').addEventListener('click', () => overlay.classList.remove('open'));
 
-document.getElementById('sector-grid').addEventListener('click', e => {
-  const tile = e.target.closest('.tile');
-  if (tile) openDetail(sectors[tile.dataset.i], +tile.dataset.i);
-});
-document.getElementById('zone-grid').addEventListener('click', e => {
-  const tile = e.target.closest('.tile');
-  if (tile) openDetail(zones[tile.dataset.i], +tile.dataset.i);
+document.addEventListener('click', e => {
+  const card = e.target.closest('[data-list]');
+  if (!card) return;
+  const list = card.dataset.list === 'zone' ? zones : sectors;
+  openDetail(list[+card.dataset.i], +card.dataset.i);
 });
 
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    item.classList.add('active');
-    document.getElementById(item.dataset.panel).classList.add('active');
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('text-navy'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.add('text-navy/40'));
+    btn.classList.remove('text-navy/40');
+    btn.classList.add('text-navy');
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
     overlay.classList.remove('open');
   });
 });
 
 const cardSelect = document.getElementById('card-sector-select');
 cardSelect.innerHTML = sectors.map((s,i) => `<option value="${i}">${s.title}</option>`).join('');
-function renderCard(i) {
+function renderShareCard(i) {
   document.getElementById('card-title').textContent = sectors[i].title;
   document.getElementById('card-desc').textContent = sectors[i].summary;
 }
-renderCard(0);
-cardSelect.addEventListener('change', e => renderCard(e.target.value));
+renderShareCard(0);
+cardSelect.addEventListener('change', e => renderShareCard(e.target.value));
 
 document.getElementById('download-card').addEventListener('click', () => {
-  html2canvas(document.getElementById('card'), { useCORS: true }).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'scan-the-plan-card.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  });
+  alert('Download uses html2canvas in the live build — same as the current site.');
 });
+
+lucide.createIcons();
 </script>
 
 </body>
